@@ -1,10 +1,13 @@
 package br.com.aprendendo.cliente.http.controller;
 
 import br.com.aprendendo.cliente.entity.Cliente;
+import br.com.aprendendo.cliente.model.ClienteDto;
 import br.com.aprendendo.cliente.service.ClienteService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,8 +32,8 @@ public class ClienteController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Cliente> listaCliente(){
-        return clienteService.listaCliente();
+    public Page<ClienteDto> listaCliente(Pageable paginacao){
+        return clienteService.listaCliente(paginacao );
     }
 
     @GetMapping("/{id}")
